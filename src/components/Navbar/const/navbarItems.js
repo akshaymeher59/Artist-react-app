@@ -34,6 +34,6 @@ export const mainNavbarItems =  [
         id: 4,
         icon: <StarHalfIcon />,
         label: 'Albums Rating',
-        route: 'albumRating',
+        route: 'albumsRating',
     },
 ]

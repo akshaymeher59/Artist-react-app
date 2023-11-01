@@ -3,12 +3,13 @@ import Navbar from './components/Navbar/Navbar';
 import { Outlet } from "react-router-dom";
 import Grid from '@mui/material/Grid';
 
-function HomePages() {
 
+function HomePages() {
   return (
     <Grid container>
       <Navbar />
       <Outlet />
+     
     </Grid>
   );
 }

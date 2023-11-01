@@ -1,9 +1,9 @@
 import React from 'react'
 
-function AlbumRating() {
+function AlbumsRating() {
   return (
     <div>AlbumRating</div>
   )
 }
 
-export default AlbumRating
+export default AlbumsRating

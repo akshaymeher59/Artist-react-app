@@ -1,5 +1,4 @@
 import HomePages from "./HomePages";
-import Navbar from "./components/Navbar/Navbar";
 import Users from "./pages/Users";
 import Artist from "./pages/Artist"
 import Album from "./pages/Album"
@@ -9,7 +8,7 @@ import {
   Route
 } from "react-router-dom";
 import UsersRating from "./pages/UsersRating";
-import AlbumRating from "./pages/AlbumRating";
+import AlbumsRating from "./pages/AlbumsRating";
 
 
 function App() {
@@ -23,7 +22,7 @@ function App() {
             <Route path="artist" element={<Artist />} />
             <Route path="album" element={<Album />} />
             <Route path="usersRating" element={<UsersRating/>} />
-            <Route path="albumRating" element={<AlbumRating />} />
+            <Route path="albumsRating" element={<AlbumsRating />} />
           </Route>
         </Routes>
       </BrowserRouter>
