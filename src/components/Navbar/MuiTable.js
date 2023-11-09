@@ -8,18 +8,13 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button } from '@mui/material';
 
-export default function MuiTable() {
+export default function MuiTable({ users, setIsEdit}) {
 
-    const [user, setUser] = React.useState([]);
-    // React.useEffect(() => {
-    //     async function fetchUser() {
-    //         const res = await fetch('http://localhost:8080/Users');
-    //         const data = await res.json();
-    //         console.log("data", data);
-    //         setUser(data);
-    //     }
-    //     fetchUser();
-    // }, []);
+    // const [user, setUser] = React.useState([]);
+    function editHandler(id){
+            
+    }
+   
     
     return (
         <TableContainer component={Paper} style={{ marginLeft: '50px', marginTop: '20px', width: "700px" }}>
@@ -38,7 +33,7 @@ export default function MuiTable() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                    {user.map((row) => (
+                    {users.map((row) => (
                         <TableRow
                             key={row.id}
                             sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -50,7 +45,10 @@ export default function MuiTable() {
                                 {row.userName}
                             </TableCell>
                             <TableCell align="center">
-                                <Button variant='contained' style={{ marginRight: '2px' }} >Edit</Button>
+                                <Button variant='contained' 
+                                style={{ marginRight: '2px' }} 
+                                onClick={ (e)=> editHandler(row.id) }
+                                >Edit</Button>
                                 <Button variant='contained' >Delete</Button>
                             </TableCell>
 

@@ -1,30 +1,23 @@
 import React, { useState } from 'react'
 import { TextField, Button, Stack, Card, CardContent, Container } from '@mui/material'
 import MuiTable from '../components/Navbar/MuiTable'
+import { useDispatch, useSelector } from 'react-redux';
+import { addUser } from '../features/users/usersSlice';
 
 
 
 const Users = () => {
-
-
   const [userName, setUserName] = useState('');
-
+  const [isEdit,setIsEdit] = useState(false);
+  const dispatch = useDispatch();
 
   function addUserHandler() {
-    async function addUser() {
-      const res = await fetch('http://localhost:8080/Users', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({userName: userName})
-      });
-      const data = await res.json();
-      console.log("data", data);
-      // setUser(data);
-    }
-    addUser();
+    dispatch(addUser(userName));
+    setUserName('');
   }
+
+  const users = useSelector(store => store.user);
+  console.log("Users", users);
 
   return (
     <Container style={{ marginLeft: '320px' }}>
@@ -33,14 +26,31 @@ const Users = () => {
           <form noValidate>
             <Stack spacing={2} width={700}>
               <h1>User's Details</h1>
-              <TextField label={'User Id'} disabled value={1} />
-              <TextField label={'User Name'} onChange={(e) => setUserName(e.target.value)} />
-              <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
+              {
+                isEdit ?
+                  <>
+                    <TextField label={'User Id'} disabled value={users.length + 1} />
+                    <TextField label={'User Name'}
+                      onChange={(e) => setUserName(e.target.value)}
+                      value={userName}
+                    />
+                    <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
+                  </>
+                  :
+                  <>
+                    <TextField label={'User Id'} disabled value={users.length + 1} />
+                    <TextField label={'User Name'}
+                      onChange={(e) => setUserName(e.target.value)}
+                      value={userName}
+                    />
+                    <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
+                  </>
+              }
             </Stack>
           </form>
         </CardContent>
       </Card>
-      <MuiTable />
+      <MuiTable users={users} setIsEdit={setIsEdit}/>
     </Container>
   )
 }
