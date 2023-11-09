@@ -8,7 +8,7 @@ import { addUser } from '../features/users/usersSlice';
 
 const Users = () => {
   const [userName, setUserName] = useState('');
-  const [isEdit,setIsEdit] = useState(false);
+
   const dispatch = useDispatch();
 
   function addUserHandler() {
@@ -26,31 +26,17 @@ const Users = () => {
           <form noValidate>
             <Stack spacing={2} width={700}>
               <h1>User's Details</h1>
-              {
-                isEdit ?
-                  <>
-                    <TextField label={'User Id'} disabled value={users.length + 1} />
+              <TextField label={'User Id'} disabled value={users.length + 1} />
                     <TextField label={'User Name'}
                       onChange={(e) => setUserName(e.target.value)}
                       value={userName}
                     />
                     <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
-                  </>
-                  :
-                  <>
-                    <TextField label={'User Id'} disabled value={users.length + 1} />
-                    <TextField label={'User Name'}
-                      onChange={(e) => setUserName(e.target.value)}
-                      value={userName}
-                    />
-                    <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
-                  </>
-              }
             </Stack>
           </form>
         </CardContent>
       </Card>
-      <MuiTable users={users} setIsEdit={setIsEdit}/>
+      <MuiTable users={users}/>
     </Container>
   )
 }
