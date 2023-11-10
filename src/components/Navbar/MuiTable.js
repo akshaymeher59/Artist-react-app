@@ -10,6 +10,7 @@ import { Button, TextField } from '@mui/material';
 import { editUsers, deleteUsers } from '../../features/users/usersSlice';
 import { useDispatch } from 'react-redux';
 import { deleteArtists, editArtists } from '../../features/artist/artistSlice';
+import { deleteAlbums, editAlbums } from '../../features/albums/albumSlice';
 
 export default function MuiTable({ users, type }) {
 
@@ -29,7 +30,9 @@ export default function MuiTable({ users, type }) {
     }
 
     function handleSave(id){
-        if(type==='artist'){
+        if(type==='album'){
+            dispatch(editAlbums(id, updateName));
+        }else if(type==='artist'){
             dispatch(editArtists(id, updateName));
         }else{
             dispatch(editUsers(id, updateName));
@@ -39,7 +42,9 @@ export default function MuiTable({ users, type }) {
     }
 
     function deleteHandler(id){
-        if(type==='artist'){
+        if(type==='album'){
+            dispatch(deleteAlbums(id, updateName));
+        }else if(type==='artist'){
             dispatch(deleteArtists(id));
         }else{
             dispatch(deleteUsers(id));
@@ -54,10 +59,10 @@ export default function MuiTable({ users, type }) {
                 <TableHead style={{ backgroundColor: '#101F33', color: 'rgba(255, 255, 255, 0.7)' }}>
                     <TableRow>
                         <TableCell style={{ color: 'rgba(255, 255, 255, 0.7)' }} >
-                            Uid
+                            {type} Id
                         </TableCell>
                         <TableCell align="center" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
-                            User Name
+                            {type} Name
                         </TableCell>
                         <TableCell align="center" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                             Actions

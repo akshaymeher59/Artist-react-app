@@ -5,7 +5,7 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useSelector } from 'react-redux';
 
-export default function SelectUser({users, type}) {
+export default function SelectType({users, type}) {
     const [selectedUser, setSelectedUser] = React.useState('');
 
     // console.log("select", users);
@@ -17,7 +17,7 @@ export default function SelectUser({users, type}) {
 
     return (
         <FormControl sx={{ m: 1, minWidth: 120 }} size="small">
-            <InputLabel id="demo-select-small-label">Select User</InputLabel>
+            <InputLabel id="demo-select-small-label">Select {type}</InputLabel>
             <Select
                 labelId="demo-select-small-label"
                 id="demo-select-small"
