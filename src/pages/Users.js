@@ -36,7 +36,7 @@ const Users = () => {
           </form>
         </CardContent>
       </Card>
-      <MuiTable users={users}/>
+      <MuiTable users={users} type="user"/>
     </Container>
   )
 }

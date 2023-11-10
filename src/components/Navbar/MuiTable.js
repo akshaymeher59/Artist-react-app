@@ -9,8 +9,9 @@ import Paper from '@mui/material/Paper';
 import { Button, TextField } from '@mui/material';
 import { editUsers, deleteUsers } from '../../features/users/usersSlice';
 import { useDispatch } from 'react-redux';
+import { deleteArtists, editArtists } from '../../features/artist/artistSlice';
 
-export default function MuiTable({ users }) {
+export default function MuiTable({ users, type }) {
 
     const dispatch= useDispatch();
 
@@ -28,13 +29,21 @@ export default function MuiTable({ users }) {
     }
 
     function handleSave(id){
-       dispatch(editUsers(id, updateName));
+        if(type==='artist'){
+            dispatch(editArtists(id, updateName));
+        }else{
+            dispatch(editUsers(id, updateName));
+        }
         setEditUser('');
         console.log("Update", users);
     }
 
     function deleteHandler(id){
-        dispatch(deleteUsers(id));
+        if(type==='artist'){
+            dispatch(deleteArtists(id));
+        }else{
+            dispatch(deleteUsers(id));
+        }  
         console.log("Delete", users);
     }
 

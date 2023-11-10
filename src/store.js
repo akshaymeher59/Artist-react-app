@@ -1,11 +1,13 @@
 import {applyMiddleware, combineReducers, createStore} from 'redux';
 import userReducer from './features/users/usersSlice';
+import artistReducer from './features/artist/artistSlice';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 
 
 const rootReducer= combineReducers({
-    user: userReducer
+    user: userReducer,
+    artist: artistReducer
 })
 
 
