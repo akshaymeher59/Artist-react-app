@@ -4,7 +4,7 @@ import MuiTable from '../components/Navbar/MuiTable'
 
 
 
-const Artist = ({user}) => {
+const Artist = () => {
   return (
     <Container style={{ marginLeft: '320px' }}>
       <Card style={{ marginLeft: '50px', marginTop: '50px' }} color='primary'>
@@ -19,7 +19,7 @@ const Artist = ({user}) => {
           </form>
         </CardContent>
       </Card>
-      <MuiTable  user={user}/>
+      <MuiTable />
     </Container>
   )
 }

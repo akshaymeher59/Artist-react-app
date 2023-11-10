@@ -7,22 +7,35 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { Button, TextField } from '@mui/material';
+import { editUsers, deleteUsers } from '../../features/users/usersSlice';
+import { useDispatch } from 'react-redux';
 
-export default function MuiTable({ users, }) {
+export default function MuiTable({ users }) {
 
-    const [editUser, setEditUser] = React.useState({ userName: '', isEdit: false });
+    const dispatch= useDispatch();
+
+    const [editUser, setEditUser] = React.useState({userName:""});
 
     const [updateName, setUpdateName] = React.useState('');
 
     function editHandler(id) {
+        let name= users.filter((user)=> user.id==id)[0].userName;
         setEditUser((prevState) => {
-            return { ...prevState, userName: users[id - 1].userName, isEdit: true }
+          // console.log("name", name);
+            return { ...prevState, userName: name, id: id}
         });
-        setUpdateName(users[id - 1].userName);
+        setUpdateName(name);
     }
 
     function handleSave(id){
-        
+       dispatch(editUsers(id, updateName));
+        setEditUser('');
+        console.log("Update", users);
+    }
+
+    function deleteHandler(id){
+        dispatch(deleteUsers(id));
+        console.log("Delete", users);
     }
 
 
@@ -52,10 +65,9 @@ export default function MuiTable({ users, }) {
                                 U{row.id}
                             </TableCell>
                             <TableCell align="center" component="th" scope="row">
-
                                 
                                 {
-                                    editUser.isEdit ?
+                                    editUser.hasOwnProperty('id') && editUser.id ===row.id ?
                                     <>
                                         <TextField type='text' value={updateName}
                                             onChange={(e) => setUpdateName(e.target.value)}
@@ -74,7 +86,10 @@ export default function MuiTable({ users, }) {
                                     style={{ marginRight: '2px' }}
                                     onClick={(e) => editHandler(row.id)}
                                 >Edit</Button>
-                                <Button variant='contained' >Delete</Button>
+                                <Button 
+                                variant='contained' 
+                                onClick={ (e)=>{ deleteHandler(row.id)}}
+                                >Delete</Button>
                             </TableCell>
 
                         </TableRow>
