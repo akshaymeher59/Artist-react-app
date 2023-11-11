@@ -5,14 +5,20 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import { useSelector } from 'react-redux';
 
-export default function SelectType({users, type}) {
-    const [selectedUser, setSelectedUser] = React.useState('');
+export default function SelectType({ users, type, selectedUser, setSelectedUser, setSelectedArtist }) {
+
 
     // console.log("select", users);
 
     const handleChange = (event) => {
-        console.log("HandleChange", event.target.value);
-        setSelectedUser(event.target.value);
+
+        // console.log("HandleChange", event.target.value);
+        if (type === 'user') {
+            setSelectedUser(event.target.value);
+        } else {
+            setSelectedArtist(event.target.value);
+        }
+
     };
 
     return (

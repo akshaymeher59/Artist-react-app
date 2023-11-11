@@ -14,41 +14,41 @@ import { deleteAlbums, editAlbums } from '../../features/albums/albumSlice';
 
 export default function MuiTable({ users, type }) {
 
-    const dispatch= useDispatch();
+    const dispatch = useDispatch();
 
-    const [editUser, setEditUser] = React.useState({userName:""});
+    const [editUser, setEditUser] = React.useState({ userName: "" });
 
     const [updateName, setUpdateName] = React.useState('');
 
     function editHandler(id) {
-        let name= users.filter((user)=> user.id==id)[0].userName;
+        let name = users.filter((user) => user.id == id)[0].userName;
         setEditUser((prevState) => {
-          // console.log("name", name);
-            return { ...prevState, userName: name, id: id}
+            // console.log("name", name);
+            return { ...prevState, userName: name, id: id }
         });
         setUpdateName(name);
     }
 
-    function handleSave(id){
-        if(type==='album'){
+    function handleSave(id) {
+        if (type === 'album') {
             dispatch(editAlbums(id, updateName));
-        }else if(type==='artist'){
+        } else if (type === 'artist') {
             dispatch(editArtists(id, updateName));
-        }else{
+        } else {
             dispatch(editUsers(id, updateName));
         }
         setEditUser('');
         console.log("Update", users);
     }
 
-    function deleteHandler(id){
-        if(type==='album'){
+    function deleteHandler(id) {
+        if (type === 'album') {
             dispatch(deleteAlbums(id, updateName));
-        }else if(type==='artist'){
+        } else if (type === 'artist') {
             dispatch(deleteArtists(id));
-        }else{
+        } else {
             dispatch(deleteUsers(id));
-        }  
+        }
         console.log("Delete", users);
     }
 
@@ -64,6 +64,13 @@ export default function MuiTable({ users, type }) {
                         <TableCell align="center" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                             {type} Name
                         </TableCell>
+
+                        {
+                            type === 'album' &&
+                            <TableCell align="center" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
+                                Artist Name
+                            </TableCell>
+                        }
                         <TableCell align="center" style={{ color: 'rgba(255, 255, 255, 0.7)' }}>
                             Actions
                         </TableCell>
@@ -79,30 +86,40 @@ export default function MuiTable({ users, type }) {
                                 U{row.id}
                             </TableCell>
                             <TableCell align="center" component="th" scope="row">
-                                
+
                                 {
-                                    editUser.hasOwnProperty('id') && editUser.id ===row.id ?
-                                    <>
-                                        <TextField type='text' value={updateName}
-                                            onChange={(e) => setUpdateName(e.target.value)}
-                                            size="small" margin='none'
-                                        />
-                                        <Button variant='contained' 
-                                        onClick={(e)=>{handleSave(row.id)}}
-                                        >Save</Button>
-                                    </> :
-                                    row.userName
+                                    editUser.hasOwnProperty('id') && editUser.id === row.id ?
+                                        <>
+                                            <TextField type='text' value={updateName}
+                                                onChange={(e) => setUpdateName(e.target.value)}
+                                                size="small" margin='none'
+                                            />
+                                            <Button variant='contained'
+                                                onClick={(e) => { handleSave(row.id) }}
+                                            >Save</Button>
+                                        </> :
+                                        row.userName
                                 }
 
                             </TableCell>
+
+                            {
+                                type === 'album' &&
+                                <TableCell align="center">
+                                    {row.artist}
+                                </TableCell>
+                            }
+
+
+
                             <TableCell align="center">
                                 <Button variant='contained'
                                     style={{ marginRight: '2px' }}
                                     onClick={(e) => editHandler(row.id)}
                                 >Edit</Button>
-                                <Button 
-                                variant='contained' 
-                                onClick={ (e)=>{ deleteHandler(row.id)}}
+                                <Button
+                                    variant='contained'
+                                    onClick={(e) => { deleteHandler(row.id) }}
                                 >Delete</Button>
                             </TableCell>
 

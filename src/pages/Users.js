@@ -12,8 +12,12 @@ const Users = () => {
   const dispatch = useDispatch();
 
   function addUserHandler() {
-    dispatch(addUser(userName));
-    setUserName('');
+
+    if (userName !== '') {
+      dispatch(addUser(userName));
+      setUserName('');
+    }
+
   }
 
   const users = useSelector(store => store.user);
@@ -27,16 +31,16 @@ const Users = () => {
             <Stack spacing={2} width={700}>
               <h1>User's Details</h1>
               <TextField label={'User Id'} disabled value={users.length + 1} />
-                    <TextField label={'User Name'}
-                      onChange={(e) => setUserName(e.target.value)}
-                      value={userName}
-                    />
-                    <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
+              <TextField label={'User Name'}
+                onChange={(e) => setUserName(e.target.value)}
+                value={userName}
+              />
+              <Button variant='contained' color='primary' onClick={addUserHandler}>Add </Button>
             </Stack>
           </form>
         </CardContent>
       </Card>
-      <MuiTable users={users} type="user"/>
+      <MuiTable users={users} type="user" />
     </Container>
   )
 }

@@ -4,7 +4,12 @@ const intialStateAlbums = [];
 export default function albumReducer(state = intialStateAlbums, action) {
     switch (action.type) {
         case 'album/addAlbums':
-            return [...state, { id: Date.now(), userName: action.payload }];
+            return [...state, {
+                id: Date.now(),
+                userName: action.payload.userName,
+                user: action.payload.user,
+                artist: action.payload.artist
+            }];
 
         case 'album/editAlbums':
             state.splice(state.indexOf(...state.filter((data) => data.id === action.payload.id)), 1, {
@@ -21,8 +26,8 @@ export default function albumReducer(state = intialStateAlbums, action) {
 
 }
 
-export function addAlbums(userName) {
-    return { type: 'album/addAlbums', payload: userName }
+export function addAlbums(userName, user, artist) {
+    return { type: 'album/addAlbums', payload: {userName, user, artist} }
 }
 
 export function editAlbums(id, userName) {

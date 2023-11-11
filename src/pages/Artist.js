@@ -7,12 +7,14 @@ import { addArtists } from '../features/artist/artistSlice'
 
 
 const Artist = () => {
-  const [addArtist, setAddArtist] = useState();
+  const [addArtist, setAddArtist] = useState('');
   const artist = useSelector(store => store.artist);
-  const dispatch= useDispatch();
+  const dispatch = useDispatch();
   function addHandler() {
-    dispatch(addArtists(addArtist));
-    setAddArtist('');
+    if (addArtist !== '') {
+      dispatch(addArtists(addArtist));
+      setAddArtist('');
+    }
   }
 
 
@@ -23,7 +25,7 @@ const Artist = () => {
           <form noValidate>
             <Stack spacing={2} width={700}>
               <h1>Artist's Details</h1>
-              <TextField label={'Artist Id'} value={artist.length+1} disabled/>
+              <TextField label={'Artist Id'} value={artist.length + 1} disabled />
               <TextField
                 label={'Artist Name'}
                 value={addArtist}
