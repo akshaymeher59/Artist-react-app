@@ -14,7 +14,9 @@ export default function albumReducer(state = intialStateAlbums, action) {
             }];
 
         case 'album/editAlbums':
-            state.splice(state.indexOf(...state.filter((data) => data.id === action.payload.id)), 1, {
+            let filteredAlbum = state.filter((data) => data.id === action.payload.id)[0]
+            state.splice(state.indexOf(filteredAlbum), 1, {
+                ...filteredAlbum,
                 id: action.payload.id,
                 userName: action.payload.userName
             });

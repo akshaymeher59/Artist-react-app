@@ -33,7 +33,7 @@ export default function MuiTable({ users, type }) {
         if (type === 'album') {
             dispatch(editAlbums(id, updateName));
         } else if (type === 'artist') {
-            dispatch(editArtists(id, updateName));
+            dispatch(editArtists(id, updateName));          
         } else {
             dispatch(editUsers(id, updateName));
         }

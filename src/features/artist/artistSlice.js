@@ -7,7 +7,9 @@ export default function artistReducer(state = intialStateArtist, action) {
             return [...state, { id: Date.now(), userName: action.payload }];
 
         case 'artist/editArtists':
-            state.splice(state.indexOf(...state.filter((data) => data.id === action.payload.id)), 1, {
+            let prevData= state.filter((data) => data.id === action.payload.id)[0];
+            state.splice(state.indexOf(prevData), 1, {
+                ...prevData,
                 id: action.payload.id,
                 userName: action.payload.userName
             });
